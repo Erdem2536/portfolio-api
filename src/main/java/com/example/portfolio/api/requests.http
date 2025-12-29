@@ -1,0 +1,36 @@
+@baseUrl = http://localhost:8080
+
+###
+### 0) Health check (optional)
+GET {{baseUrl}}/v3/api-docs
+
+###
+### 1) Create portfolio (copy the id from the response and paste into @portfolioId)
+POST {{baseUrl}}/api/portfolios
+Content-Type: application/json
+
+{
+  "name": "My First Portfolio"
+}
+
+###
+### 2) Set this manually after step 1
+@portfolioId = 0dd64ba3-605d-4bf6-93d7-0afb910b0f55
+
+###
+### 3) Get portfolio by id (before holding)
+GET {{baseUrl}}/api/portfolios/{{portfolioId}}
+
+###
+### 4) Add holding
+POST {{baseUrl}}/api/portfolios/{{portfolioId}}/holdings
+Content-Type: application/json
+
+{
+  "symbol": "AAPL",
+  "quantity": 10
+}
+
+###
+### 5) Get portfolio by id (after holding)
+GET {{baseUrl}}/api/portfolios/{{portfolioId}}
